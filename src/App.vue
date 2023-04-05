@@ -1,19 +1,43 @@
 <template>
-  <BaseButton 
-    :disabled="false" 
-    :type="'solid'"
-    @click="buttonClick">
-    text given using slot 
-  </BaseButton>
+  <section name="esercizio 3" >
 
+    <div class="taskFrom">
 
-  <p>Message is: {{ inputText }}</p>
-  <BaseInput v-model:inputValue="inputText" />
+      <BaseInput v-model:inputValue="inputText" />
 
-  
-  <p>is checked? {{ checkboxValue }}</p>
-  <BaseCheckBox v-model:checkBoxValue="checkboxValue"/>
+      <BaseButton 
+        :disabled="inputText === '' ? true:false" 
+        :type="'solid'"
+        @click="addTask">
+        add task 
+      </BaseButton>
+    </div>
 
+    <table v-if="tasks">
+      <tr v-for="(task, index) in tasks" :key="task">
+        <td :class="[(checkboxValue[index] ? 'line-through': '')]">{{ task }}</td>
+        <td>
+          <BaseButton 
+            :type="'solid'"
+            @click="deleteTask(task)">
+            delete
+          </BaseButton>
+        </td>
+        <td>
+          <p>is completed?</p>
+          <BaseCheckBox 
+          v-model:checkBoxValue="checkboxValue[index]"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <div class="counters">
+      <p> total tasks: {{ calculateTotalTasks() }}</p>
+      <p> active tasks: {{ calculateActiveTasks() }}</p>
+      <p> tasks done: {{ calculateDoneTasks() }} </p>
+    </div>
+  </section>
 
 </template>
 
@@ -32,19 +56,44 @@ export default {
   data() {
     return {
       inputText: '',
-      checkboxValue: false,
+      checkboxValue: [],
       message: '',
       checked: false,
+      tasks: [],
     }
   },
   methods: {
-    buttonClick(){return null},
+    addTask(){
+      this.tasks.push(this.inputText);
+      this.inputText = '';
+    },
+    deleteTask(task) {
+      this.tasks = this.tasks.filter((element) => {
+        return element!==task;
+      })
+    },
+    calculateTotalTasks(){
+      return this.tasks.length;
+    },
+    calculateDoneTasks(){
+      return  this.checkboxValue.filter((element) => {
+        return element===true;
+      }).length;
+    },
+    calculateActiveTasks(){
+      return this.calculateTotalTasks() - this.calculateDoneTasks();
+    }
   }
 }
 </script>
 
 <style>
 #app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
