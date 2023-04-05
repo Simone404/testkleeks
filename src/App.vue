@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <BaseButton 
+    :disabled="false" 
+    :type="'solid'"
+    @click="buttonClick">
+    text given using slot 
+  </BaseButton>
+
+
+  <p>Message is: {{ inputText }}</p>
+  <BaseInput v-model:inputValue="inputText" />
+
+  
+  <p>is checked? {{ checkboxValue }}</p>
+  <BaseCheckBox v-model:checkBoxValue="checkboxValue"/>
+
+
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import BaseButton from './components/BaseButton.vue';
+import BaseInput from './components/BaseInput.vue';
+import BaseCheckBox from './components/BaseCheckBox.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BaseButton,
+    BaseInput,
+    BaseCheckBox,
+  },
+  data() {
+    return {
+      inputText: '',
+      checkboxValue: false,
+      message: '',
+      checked: false,
+    }
+  },
+  methods: {
+    buttonClick(){return null},
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
