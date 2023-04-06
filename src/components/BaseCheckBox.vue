@@ -2,8 +2,9 @@
   <div class="checkboxContainer">
     <input
     type="checkbox"   
-    :checked="checkBoxValue"
+    :checked="checkBoxValue === true"
     @change="$emit('update:checkBoxValue', $event.target.checked)"
+    name="isActive"
     />
   </div>
 </template>

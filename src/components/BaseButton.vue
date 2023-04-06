@@ -1,7 +1,7 @@
 <template>
-    <div class="buttonContainer">
+    <div class="buttonContainer ">
         <button
-            :class="[getClassByType(), (disabled ? 'opacity-50 cursor-not-allowed' :'')]"
+            :class="[getClassByType(), (disabled ? 'opacity-50 cursor-not-allowed' :''), textTransform]"
             :disabled="disabled">
             <slot></slot>
         </button>
@@ -21,6 +21,10 @@ export default {
       disabled: {
         type: Boolean,
         default: false,
+      },
+      textTransform: {
+        type: String,
+        default: '',
       },
     },
     methods: {
