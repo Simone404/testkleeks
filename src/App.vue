@@ -124,7 +124,7 @@ export default {
   },
   computed: {
     checkboxChanged() {
-      return this.tasks.map(task => task.active)
+      return this.tasks.map(task => task.active);
     }
   },
   watch: {
