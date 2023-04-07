@@ -27,9 +27,9 @@ export default {
         default: '',
       },
     },
-    methods: {
-        getClassByType(){
-            switch(this.type){
+    setup(props) {
+        function getClassByType(){
+            switch(props.type){
                 case 'text': {
                     return 'bg-trasparent text-blue-400 font-bold py-2 px-4 rounded';                    
                 }
@@ -40,6 +40,10 @@ export default {
                     return 'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded';
                 }
             }
+        }
+
+        return {
+            getClassByType,
         }
     },
 
