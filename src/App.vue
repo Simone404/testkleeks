@@ -119,7 +119,6 @@ export default {
     onBeforeMount(()=>{
       if(localStorage.getItem('tasks')) 
       tasksArray.tasks = JSON.parse(localStorage.getItem('tasks'));
-        console.log(tasksArray.tasks);
     });
     const checkboxChanged =  computed(() => {
       return tasksArray.tasks.map(task => task.active);
@@ -138,8 +137,6 @@ export default {
     function addTask(){
       tasksArray.tasks.push({'name': inputText.value, 'active': false});
       inputText.value = '';
-      console.log(tasksArray.tasks);
-
     };
     function deleteTask(task) {
       tasksArray.tasks = tasksArray.tasks.filter((element) => {
@@ -147,7 +144,6 @@ export default {
       })
     };
     function calculateTotalTasks(){
-      console.log(tasksArray.tasks);
       return tasksArray.tasks.length;
     };
     function calculateDoneTasks(){
