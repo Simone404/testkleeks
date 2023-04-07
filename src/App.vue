@@ -109,7 +109,6 @@ export default {
     BaseCheckBox,
   },
   setup() {
-    
     let inputText = ref('');
     let tasksArray = reactive({tasks: []});
     let currentFilter = ref('all');
